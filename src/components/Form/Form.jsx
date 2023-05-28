@@ -1,31 +1,65 @@
-import { Component } from 'react';
+
+import { useState } from 'react';
 import css from './Form.module.css'
-export class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
 
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value,
-    });
-  };
+export  function Form ({ onSubmit }) {
 
-  handleSubmit = e => {
+   const [name,setName] = useState('');
+   const [number,setNumber] =useState('');
+
+//  export const Form = ({ onSubmit }) => {
+//   const [name, setName] = useState('');
+//   const [number, setNumber] = useState('');
+
+
+//  const handleNameChange = (event) => {
+//     setName (event.target.value)
+    
+//   };
+
+
+// const handleNumberChange = event => {
+//    setNumber(event.target.value);
+//  };
+
+
+ const handleChange = event => {
+   const { name, value } = event.target;
+   switch (name) {
+     case 'name':
+       setName(value);
+
+       break;
+     case 'number':
+       setNumber(value);
+
+       break;
+
+     default:
+       break;
+   }
+ };
+
+
+const  handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.name, this.state.number);
-    this.reset();
+    onSubmit(name, number);
+     resetName();
+     reseNumber();
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
+  const resetName = () => {
+     setName('');
+   };
 
-  render() {
+    const reseNumber = () => {
+      setNumber('');
+    };
+
+   
     return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <label>
           Name
           <br />
@@ -35,8 +69,8 @@ export class Form extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            onChange={this.handleChange}
-            value={this.state.name}
+            onChange={handleChange}
+            value={name}
           />
         </label>
         <label>
@@ -49,8 +83,8 @@ export class Form extends Component {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            onChange={this.handleChange}
-            value={this.state.number}
+            onChange={handleChange}
+            value={number}
           />
         </label>
         <br />
@@ -58,4 +92,4 @@ export class Form extends Component {
       </form>
     );
   }
-}
+
