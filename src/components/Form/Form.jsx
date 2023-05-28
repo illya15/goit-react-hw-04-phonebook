@@ -8,20 +8,6 @@ export  function Form ({ onSubmit }) {
    const [name,setName] = useState('');
    const [number,setNumber] =useState('');
 
-//  export const Form = ({ onSubmit }) => {
-//   const [name, setName] = useState('');
-//   const [number, setNumber] = useState('');
-
-
-//  const handleNameChange = (event) => {
-//     setName (event.target.value)
-    
-//   };
-
-
-// const handleNumberChange = event => {
-//    setNumber(event.target.value);
-//  };
 
 
  const handleChange = event => {
